@@ -13,7 +13,7 @@
 
 // Define the pin connections for rows and columns
 #define MATRIX_ROW_PINS { D0, D1, D2, D3 }
-#define MATRIX_COL_PINS { F0, F1, F4, F5, F6, F7, B1, B3, B2, B6 }
+#define MATRIX_COL_PINS { C6, D7, E6, B4, B5, F7, B1, B3, B2, B6 }
 
 // Set the diode direction
 #define DIODE_DIRECTION COL2ROW
