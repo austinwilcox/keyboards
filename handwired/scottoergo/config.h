@@ -1,11 +1,11 @@
 #pragma once
 
 // USB Device descriptor parameter
-#define VENDOR_ID       0xFEED
-#define PRODUCT_ID      0x6060
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    Austin
-#define PRODUCT         ScottoErgo
+/* #define VENDOR_ID       0xFEED */
+/* #define PRODUCT_ID      0x6060 */
+/* #define DEVICE_VER      0x0001 */
+/* #define MANUFACTURER    Austin */
+/* #define PRODUCT         ScottoErgo */
 
 // Key matrix size
 #define MATRIX_ROWS 4
@@ -19,14 +19,16 @@
 #define DIODE_DIRECTION COL2ROW
 
 // Debounce time in milliseconds
-#define DEBOUNCE    5
+/* #define DEBOUNCE    5 */
+
+#define TAPPING_TERM 200
 
 // Mechanical locking support. Use KC_LCAP, KC_LNUM, or KC_LSCR in keymap for these keys.
-#define LOCKING_SUPPORT_ENABLE
+/* #define LOCKING_SUPPORT_ENABLE */
 
 // Locking resynchronize hack
-#define LOCKING_RESYNC_ENABLE
+/* #define LOCKING_RESYNC_ENABLE */
 
 // Bootmagic Lite key configuration
-#define BOOTMAGIC_LITE_ROW 0
-#define BOOTMAGIC_LITE_COLUMN 0
+/* #define BOOTMAGIC_LITE_ROW 0 */
+/* #define BOOTMAGIC_LITE_COLUMN 0 */
