@@ -15,4 +15,8 @@ My second hand wired keyboard, and it's a split 5x6 Dactyl Manuform. This keyboa
 I built this with a 3d printed case, and Akko Lavender Switches (My current favorite switches to use), with a QMK configuration.
 
 ## Scotto Ergo
-
+```shell
+❯ source ~/py_envs/bin/activate
+❯ qmk compile --keyboard handwired/scottokeebs/scottoergo --keymap austinwilcox
+❯ qmk flash .build/handwired_scottokeebs_scottoergo_austinwilcox.hex
+```
