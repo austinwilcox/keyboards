@@ -16,7 +16,7 @@ enum {
 };
 
 // Tap Dance functions
-void dance_slash_finished(qk_tap_dance_state_t *state, void *user_data) {
+void dance_slash_finished(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         // Single tap: output /
         register_code(KC_SLSH);
@@ -27,18 +27,18 @@ void dance_slash_finished(qk_tap_dance_state_t *state, void *user_data) {
             tap_code16(KC_PIPE);
             register_code(KC_LSFT);
         } else {
-            // Double-tap: output \
+            // Double-tap: output
             tap_code16(KC_BSLS);
         }
     }
 }
 
-void dance_slash_reset(qk_tap_dance_state_t *state, void *user_data) {
+void dance_slash_reset(tap_dance_state_t *state, void *user_data) {
     unregister_code(KC_SLSH);
 }
 
 // Tap Dance definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [TD_SLASH_BACKSLASH] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_slash_finished, dance_slash_reset),
 };
 
@@ -46,9 +46,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_split_3x5_3(
         KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,
-        LGUI_T(KC_A), LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), KC_G, KC_M, RSFT_T(KC_N), RCTL(KC_E), RALT_T(KC_I), RGUI_T(KC_O),
+        LGUI_T(KC_A), LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), KC_G, KC_M, RSFT_T(KC_N), RCTL_T(KC_E), RALT_T(KC_I), LGUI_T(KC_O),
         KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_K,    KC_H,    KC_COMM, KC_DOT,  TD(TD_SLASH_BACKSLASH),
-        LT(1, KC_TAB), LT(2, KC_ESC), LT(3, KC_LGUI), LT(4, KC_ENT), LT(5, KC_BSPC), LT(6, KC_DEL)
+        LT(3, KC_TAB), LT(2, KC_ESC), LT(1, KC_SPC), LT(4, KC_ENT), LT(5, KC_BSPC), LT(6, KC_DEL)
     ),
     [_EDIT] = LAYOUT_split_3x5_3(
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_AGIN, KC_PSTE, KC_COPY, KC_CUT,  KC_UNDO,
@@ -71,14 +71,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUM] = LAYOUT_split_3x5_3(
         KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_QUOT, KC_4,    KC_5,    KC_6,    KC_EQL,  KC_NO,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_BSLS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_LPRN, KC_RPRN, KC_MINS, KC_0,    KC_NO,   KC_NO
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_BSLS, KC_NO,   KC_NO,   KC_NO,   KC_DOT,   KC_NO,
+        KC_DOT, KC_MINS, KC_0, KC_NO,    KC_BSPC,   KC_NO
     ),
     [_SYM] = LAYOUT_split_3x5_3(
         KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_DQUO, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS, KC_NO,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
-        KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_MINS, KC_NO,   KC_NO,   KC_NO
+        KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, KC_NO,   KC_NO,   KC_NO,   KC_DOT,   KC_NO,
+        KC_LPRN,   KC_RPRN,   KC_MINS, KC_NO,   KC_NO,   KC_NO
     ),
     [_FUNC] = LAYOUT_split_3x5_3(
         KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
