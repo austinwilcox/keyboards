@@ -13,3 +13,6 @@ I built this with a 3d printed case, and Glorious Panda switches, with a QMK con
 My second hand wired keyboard, and it's a split 5x6 Dactyl Manuform. This keyboard has been my daily driver for over a year now, and I find the comfort to be top notch and the concavity allows my fingers to travel less than on the Moonlander.
 
 I built this with a 3d printed case, and Akko Lavender Switches (My current favorite switches to use), with a QMK configuration.
+
+## Scotto Ergo
+
