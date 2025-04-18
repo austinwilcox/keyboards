@@ -20,3 +20,4 @@ I built this with a 3d printed case, and Akko Lavender Switches (My current favo
 ❯ qmk compile --keyboard handwired/scottokeebs/scottoergo --keymap austinwilcox
 ❯ qmk flash .build/handwired_scottokeebs_scottoergo_austinwilcox.hex
 ```
+To flash the software onto the keyboard, hold the number layer, and then press `;`.
