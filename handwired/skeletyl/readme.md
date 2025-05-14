@@ -13,7 +13,7 @@ A very small keyboard made for ergonomic enthusiasts.
 The template is:
 
 ```shell
-qmk compile -kb bastardkb/skeletyl/{VERSION}/elitec -km {KEYMAP}
+qmk compile -kb handwired/skeletyl -km miryoku
 ```
 
 | Shield Version  | default                                                         | via                                                         |
