@@ -1,14 +1,16 @@
 {
     "url": "https://www.bastardkb.com/skeletyl",
-    "usb": {
-        "pid": "0x1830"
-    },
     "split": {
         "transport": {
             "sync": {
                 "matrix_state": true
             }
         }
+    },
+    "usb": {
+        "device_version": "1.0.0",
+        "pid": "0x0016",
+        "vid": "0xFEED"
     },
     "community_layouts": ["split_3x5_3"],
     "layouts": {
