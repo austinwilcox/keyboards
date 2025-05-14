@@ -29,10 +29,6 @@
 // Locking resynchronize hack
 /* #define LOCKING_RESYNC_ENABLE */
 
-// Bootmagic Lite key configuration
-#define BOOTMAGIC_LITE_ROW 0
-#define BOOTMAGIC_LITE_COLUMN 0
-
 #define TAPPING_TERM 200
 /* #define PERMISSIVE_HOLD */
 /* #define TAPPING_TERM_PER_KEY */
