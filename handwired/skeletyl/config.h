@@ -10,8 +10,8 @@
 #define MATRIX_COLS 5
 
 // You can change these if you have a different number of rows/columns
-#define MATRIX_ROW_PINS {C6, D7, E6, B4}
-#define MATRIX_COL_PINS {F7, B1, B3, B2, B6}
+#define MATRIX_ROW_PINS {D3, D2, D0, D4}
+#define MATRIX_COL_PINS {B1, F7, F6, F5, F4}
 
 #define DIODE_DIRECTION COL2ROW
 
