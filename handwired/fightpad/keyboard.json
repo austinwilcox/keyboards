@@ -1,0 +1,47 @@
+{
+  "keyboard_name": "FightPad",
+  "manufacturer": "AustinWilcox",
+  "url": "theaustinwilcox.com",
+  "maintainer": "AustinWilcox",
+  "usb": {
+    "vid": "0x7767",
+    "pid": "0x481C",
+    "device_version": "0.0.1"
+  },
+  "features": {
+    "bootmagic": true,
+    "command": false,
+    "console": false,
+    "extrakey": true,
+    "mousekey": true,
+    "nkro": false
+  },
+  "matrix_pins": {
+    "cols": ["GP3", "GP4", "GP5", "GP15", "GP26", "GP27", "GP28"],
+    "rows": ["GP0", "GP1"]
+  },
+  "diode_direction": "COL2ROW",
+  "processor": "RP2040",
+  "bootloader": "rp2040",
+  "layouts": {
+    "LAYOUT": {
+      "layout": [
+        { "matrix": [0, 1], "x": 1, "y": 0 },
+
+        { "matrix": [0, 3], "x": 4, "y": 0 },
+        { "matrix": [0, 4], "x": 5, "y": 0 },
+        { "matrix": [0, 5], "x": 6, "y": 0 },
+        { "matrix": [0, 6], "x": 7, "y": 0 },
+
+        { "matrix": [1, 0], "x": 0, "y": 1 },
+        { "matrix": [1, 1], "x": 1, "y": 1 },
+        { "matrix": [1, 2], "x": 2, "y": 1 },
+
+        { "matrix": [1, 3], "x": 4, "y": 1 },
+        { "matrix": [1, 4], "x": 5, "y": 1 },
+        { "matrix": [1, 5], "x": 6, "y": 1 },
+        { "matrix": [1, 6], "x": 7, "y": 1 }
+      ]
+    }
+  }
+}
