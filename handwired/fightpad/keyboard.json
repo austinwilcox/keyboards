@@ -14,7 +14,12 @@
     "console": false,
     "extrakey": true,
     "mousekey": true,
-    "nkro": false
+    "nkro": false,
+    "joystick": true
+  },
+  "joystick": {
+    "button_count": 12,
+    "axis_count": 0
   },
   "matrix_pins": {
     "cols": ["GP3", "GP4", "GP5", "GP15", "GP26", "GP27", "GP28"],
