@@ -18,8 +18,7 @@
 #define USE_SERIAL
 #define SOFT_SERIAL_PIN D1
 
-#define MASTER_LEFT
-/* #define MASTER_RIGHT */
+#define EE_HANDS
 
 #define SPLIT_USB_DETECT
 #define SPLIT_USB_TIMEOUT 2500
