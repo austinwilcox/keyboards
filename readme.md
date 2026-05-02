@@ -22,19 +22,19 @@ keyboards/
 └── readme.md
 ```
 
-Boards default to vial-qmk. A few keep a vanilla-QMK keymap as well (notes per-board below).
+Each board defaults to one fork (see the table below). Boards I want to retune live live on vial-qmk so the layout is editable in the Vial GUI; the rest stay on vanilla QMK with a fixed keymap I'm happy with.
 
 ## Boards at a glance
 
 | Board                   | MCU         | Bootloader  | Default fork | Default keymap     |
 | ----------------------- | ----------- | ----------- | ------------ | ------------------ |
-| `dactyl_manuformm/5x6`  | atmega32u4  | caterina    | vial-qmk     | `austinwilcox`     |
+| `dactyl_manuformm/5x6`  | atmega32u4  | caterina    | qmk_firmware | `austinwilcox`     |
 | `fightpad`              | RP2040      | rp2040      | qmk_firmware | `default`          |
 | `scottoergo`            | atmega32u4  | atmel-dfu   | vial-qmk     | `vial`             |
 | `scottofrog`            | RP2040      | rp2040      | vial-qmk     | `vial`             |
-| `skeletyl`              | atmega32u4  | caterina    | vial-qmk     | `vial`             |
+| `skeletyl`              | atmega32u4  | caterina    | qmk_firmware | `miryoku`          |
 | `void9`                 | RP2040      | rp2040      | vial-qmk     | `vial`             |
-| `void40`                | atmega32u4  | caterina    | vial-qmk     | `vial`             |
+| `void40`                | atmega32u4  | caterina    | qmk_firmware | `colemak_dh_grid`  |
 
 ## Prerequisites
 
@@ -138,16 +138,14 @@ Each board's `keymaps/vial/vial.json` is the layout definition Vial uses. Tap-da
 - Reference Miryoku-style tap-dance JSON for the Vial GUI is at `qmk_configurator/scottoergo_miryoku_tapdance.json`.
 
 ### Dactyl Manuform 5x6 (`handwired/dactyl_manuformm/5x6/`)
-- Split board, atmega32u4 / caterina, daily driver. Uses [`EE_HANDS`](https://docs.qmk.fm/features/split_keyboard#handedness-by-eeprom) so the same firmware flashes to either half.
-- First-time hand setup: flash both halves, then in Vial open `Tools` → `Hand Setup` and set Left/Right per half. EEPROM remembers it.
-- Build (austinwilcox keymap): `make dactyl`. Flash: `make dactyl-flash`.
-- Build (vial keymap for live editing): `make dactyl-vial`. Flash: `make dactyl-vial-flash`.
+- Split board, atmega32u4 / caterina, daily driver. Vanilla QMK with the `austinwilcox` keymap. Uses [`EE_HANDS`](https://docs.qmk.fm/features/split_keyboard#handedness-by-eeprom) so the same firmware flashes to either half.
+- First-time hand setup: flash both halves, then set handedness via QMK's [`SET_HANDEDNESS`](https://docs.qmk.fm/features/split_keyboard#setting-handedness) (e.g. flash one half, plug in alone, hit the eeprom-set keycode), or burn the EEPROM byte with the dedicated handedness firmware target.
+- Build: `make dactyl`. Flash: `make dactyl-flash`.
 - Switches: Akko Lavender. 3D-printed case.
 
 ### Skeletyl (`handwired/skeletyl/`)
-- BastardKB Skeletyl, atmega32u4 / caterina, split, also `EE_HANDS`.
-- Build (vial): `make skeletyl`. Flash: `make skeletyl-flash`.
-- Build (Miryoku layout, vanilla QMK): `make skeletyl-miryoku`. Flash: `make skeletyl-miryoku-flash`.
+- BastardKB Skeletyl, atmega32u4 / caterina, split, also `EE_HANDS`. Vanilla QMK with the `miryoku` keymap.
+- Build: `make skeletyl`. Flash: `make skeletyl-flash`.
 
 ### Fightpad (`handwired/fightpad/`)
 - RP2040 arcade-style fightpad used with RetroArch on the Steam Deck.
@@ -155,9 +153,8 @@ Each board's `keymaps/vial/vial.json` is the layout definition Vial uses. Tap-da
 - Build: `make fightpad`. Flash: `make fightpad-flash`.
 
 ### Void 40 (`handwired/void40/`)
-- atmega32u4 / caterina. The original handwired board; controller is currently busted, so flashing is mostly an academic exercise until I rebuild it.
-- Build (vial): `make void40`. Flash: `make void40-flash`.
-- Build (colemak DH grid, vanilla QMK): `make void40-colemak`. Flash: `make void40-colemak-flash`.
+- atmega32u4 / caterina. The original handwired board; controller is currently busted, so flashing is mostly an academic exercise until I rebuild it. Vanilla QMK with the `colemak_dh_grid` keymap.
+- Build: `make void40`. Flash: `make void40-flash`.
 - Switches: Glorious Panda. 3D-printed case.
 
 ### Void 9 (`handwired/void9/`)
