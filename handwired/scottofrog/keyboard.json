@@ -14,8 +14,8 @@
         "nkro": true
     },
     "matrix_pins": {
-        "rows": ["GP0", "GP1", "GP2", "GP3"],
-        "cols": ["GP29", "GP28", "GP27", "GP26", "GP15", "GP14", "GP13"]
+        "rows": ["GP2", "GP4", "GP11", "GP12"],
+        "cols": ["GP0", "GP1", "GP9", "GP10", "GP15", "GP26", "GP27"]
     },
     "url": "https://scottokeebs.com",
     "usb": {
