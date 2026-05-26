@@ -16,6 +16,7 @@ VIAL_RUN = QMK_HOME=$(VIAL) qmk
 .PHONY: sync clean help \
         fightpad fightpad-flash \
         dactyl dactyl-flash \
+        redox redox-flash \
         scottoergo scottoergo-flash \
         scottofrog scottofrog-flash \
         skeletyl skeletyl-flash \
@@ -27,6 +28,7 @@ help:
 	@echo "  sync                       symlink boards into both submodules"
 	@echo "  fightpad / -flash          (vanilla qmk, default keymap)"
 	@echo "  dactyl / -flash            (vanilla qmk, austinwilcox keymap)"
+	@echo "  redox / -flash             (vial-qmk, vial keymap, split RP2040)"
 	@echo "  scottoergo / -flash        (vial-qmk, vial keymap)"
 	@echo "  scottofrog / -flash        (vial-qmk, vial keymap)"
 	@echo "  skeletyl / -flash          (vanilla qmk, miryoku keymap)"
@@ -51,6 +53,12 @@ dactyl:
 	$(QMK_RUN) compile -kb handwired/dactyl_manuformm/5x6 -km austinwilcox
 dactyl-flash:
 	$(QMK_RUN) flash -kb handwired/dactyl_manuformm/5x6 -km austinwilcox
+
+# redox split (RP2040-Zero): vial-qmk
+redox:
+	$(VIAL_RUN) compile -kb handwired/redox -km vial
+redox-flash:
+	$(VIAL_RUN) flash -kb handwired/redox -km vial
 
 # scotto ergo: vial-qmk
 scottoergo:
