@@ -16,7 +16,7 @@ VIAL_RUN = QMK_HOME=$(VIAL) qmk
 .PHONY: sync clean help \
         fightpad fightpad-flash \
         dactyl dactyl-flash \
-        redox redox-flash \
+        redox redox-flash-left redox-flash-right \
         scottoergo scottoergo-flash \
         scottofrog scottofrog-flash \
         skeletyl skeletyl-flash \
@@ -28,7 +28,8 @@ help:
 	@echo "  sync                       symlink boards into both submodules"
 	@echo "  fightpad / -flash          (vanilla qmk, default keymap)"
 	@echo "  dactyl / -flash            (vanilla qmk, austinwilcox keymap)"
-	@echo "  redox / -flash             (vial-qmk, vial keymap, split RP2040)"
+	@echo "  redox                      compile (vial-qmk, vial keymap, split RP2040)"
+	@echo "  redox-flash-left|-right    flash one half (EE_HANDS, run once per side)"
 	@echo "  scottoergo / -flash        (vial-qmk, vial keymap)"
 	@echo "  scottofrog / -flash        (vial-qmk, vial keymap)"
 	@echo "  skeletyl / -flash          (vanilla qmk, miryoku keymap)"
@@ -54,11 +55,14 @@ dactyl:
 dactyl-flash:
 	$(QMK_RUN) flash -kb handwired/dactyl_manuformm/5x6 -km austinwilcox
 
-# redox split (RP2040-Zero): vial-qmk
+# redox split (RP2040-Zero): vial-qmk. EE_HANDS — each half needs its own
+# flash with handedness baked into EEPROM. Boot each half into UF2 separately.
 redox:
 	$(VIAL_RUN) compile -kb handwired/redox -km vial
-redox-flash:
-	$(VIAL_RUN) flash -kb handwired/redox -km vial
+redox-flash-left:
+	$(VIAL_RUN) flash -kb handwired/redox -km vial -bl uf2-split-left
+redox-flash-right:
+	$(VIAL_RUN) flash -kb handwired/redox -km vial -bl uf2-split-right
 
 # scotto ergo: vial-qmk
 scottoergo:
