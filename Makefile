@@ -21,6 +21,7 @@ VIAL_RUN = QMK_HOME=$(VIAL) qmk
         scottofrog scottofrog-flash \
         skeletyl skeletyl-flash \
         void40 void40-flash \
+        void40-vial void40-vial-flash \
         void9 void9-flash
 
 help:
@@ -34,6 +35,7 @@ help:
 	@echo "  scottofrog / -flash        (vial-qmk, vial keymap)"
 	@echo "  skeletyl / -flash          (vanilla qmk, miryoku keymap)"
 	@echo "  void40 / -flash            (vanilla qmk, colemak_dh_grid keymap)"
+	@echo "  void40-vial / -flash       (vial-qmk, RP2040-Zero, MIT layout)"
 	@echo "  void9 / -flash             (vial-qmk, vial keymap)"
 	@echo "  clean                      remove .build/ artifacts in both forks"
 
@@ -87,6 +89,12 @@ void40:
 	$(QMK_RUN) compile -kb handwired/void40 -km colemak_dh_grid
 void40-flash:
 	$(QMK_RUN) flash -kb handwired/void40 -km colemak_dh_grid
+
+# void40 RP2040-Zero (MIT, encoder): vial-qmk, vial keymap
+void40-vial:
+	$(VIAL_RUN) compile -kb handwired/void40_rp2040 -km vial
+void40-vial-flash:
+	$(VIAL_RUN) flash -kb handwired/void40_rp2040 -km vial
 
 # void9: vial-qmk
 void9:
