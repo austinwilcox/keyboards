@@ -11,9 +11,11 @@
 // slash/backslash key is wired to TD(0); configure dynamic tap-dance #0 in the
 // Vial app (tap = /, the original behaviour was double-tap = \).
 //
-// Encoder: rotary on the top-left position. The encoder PUSH is the normal
-// matrix switch at [0,0] (Tab); rotation maps per-layer via encoder_map below
-// and is remappable in Vial (ENCODER_MAP_ENABLE).
+// Encoder: rotary signal pins on GP0/GP1 (see keyboard.json). The encoder PUSH
+// is wired into the matrix at the bottom-left cell [3,0] (LCtrl on the base
+// layer), so pressing the knob emits whatever keycode lives at [3,0]. Rotation
+// maps per-layer via encoder_map below and is remappable in Vial
+// (ENCODER_MAP_ENABLE).
 
 #include QMK_KEYBOARD_H
 
