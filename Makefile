@@ -15,6 +15,7 @@ VIAL_RUN = QMK_HOME=$(VIAL) qmk
 
 .PHONY: sync clean help \
         fightpad fightpad-flash \
+        fightpad-vial fightpad-vial-flash fightpad-vial-compile \
         dactyl dactyl-flash \
         redox redox-flash-left redox-flash-right \
         scottoergo scottoergo-flash \
@@ -28,6 +29,8 @@ help:
 	@echo "Targets:"
 	@echo "  sync                       symlink boards into both submodules"
 	@echo "  fightpad / -flash          (vanilla qmk, default keymap)"
+	@echo "  fightpad-vial              build, then wait for bootloader and flash"
+	@echo "  fightpad-vial-compile      build only, no flash"
 	@echo "  dactyl / -flash            (vanilla qmk, austinwilcox keymap)"
 	@echo "  redox                      compile (vial-qmk, vial keymap, split RP2040)"
 	@echo "  redox-flash-left|-right    flash one half (EE_HANDS, run once per side)"
@@ -50,6 +53,18 @@ fightpad:
 	$(QMK_RUN) compile -kb handwired/fightpad -km default
 fightpad-flash:
 	$(QMK_RUN) flash -kb handwired/fightpad -km default
+
+# fightpad: vial-qmk, vial keymap. Same dual keyboard+joystick output, but keys
+# are remappable at runtime from the Vial GUI.
+#
+# Bare target builds and then flashes — qmk sits on "Waiting for drive to
+# deploy..." until the pad is double-tap-reset into RPI-RP2, so it's safe to
+# run before touching the board. Use -compile when you only want the uf2.
+fightpad-vial: fightpad-vial-flash
+fightpad-vial-compile:
+	$(VIAL_RUN) compile -kb handwired/fightpad -km vial
+fightpad-vial-flash:
+	$(VIAL_RUN) flash -kb handwired/fightpad -km vial
 
 # dactyl manuform 5x6: vanilla qmk, austinwilcox keymap
 dactyl:

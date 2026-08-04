@@ -29,7 +29,7 @@ Each board defaults to one fork (see the table below). Boards I want to retune l
 | Board                   | MCU         | Bootloader  | Default fork | Default keymap     |
 | ----------------------- | ----------- | ----------- | ------------ | ------------------ |
 | `dactyl_manuformm/5x6`  | atmega32u4  | caterina    | qmk_firmware | `austinwilcox`     |
-| `fightpad`              | RP2040      | rp2040      | qmk_firmware | `default`          |
+| `fightpad`              | RP2040      | rp2040      | vial-qmk     | `vial`             |
 | `scottoergo`            | atmega32u4  | atmel-dfu   | vial-qmk     | `vial`             |
 | `scottofrog`            | RP2040      | rp2040      | vial-qmk     | `vial`             |
 | `skeletyl`              | atmega32u4  | caterina    | qmk_firmware | `miryoku`          |
@@ -149,8 +149,11 @@ Each board's `keymaps/vial/vial.json` is the layout definition Vial uses. Tap-da
 
 ### Fightpad (`handwired/fightpad/`)
 - RP2040 arcade-style fightpad used with RetroArch on the Steam Deck.
-- Vanilla QMK only — no Vial keymap. The earlier vial variant was dropped in favor of a single mirrored default layout.
-- Build: `make fightpad`. Flash: `make fightpad-flash`.
+- Two keymaps. `default` is vanilla QMK with a fixed layout; `vial` is the same board on vial-qmk with runtime-remappable keys.
+- Both emit a keyboard keycode *and* a joystick button per press, so the pad reads as a gamepad on the Deck (sdl2) and as a keyboard elsewhere. In the vial keymap the joystick button is bound to the matrix position rather than the keycode, so remapping in Vial never breaks existing RetroArch button bindings.
+- Vial unlock combo: hold **up** + the **far-right bottom** face button.
+- Vanilla: build `make fightpad`, flash `make fightpad-flash`.
+- Vial: `make fightpad-vial` builds *and* flashes — it parks on `Waiting for drive to deploy...`, so start it first, then double-tap reset the pad. `make fightpad-vial-compile` if you only want the uf2.
 
 ### Void 40 (`handwired/void40/`)
 - atmega32u4 / caterina. The original handwired board; controller is currently busted, so flashing is mostly an academic exercise until I rebuild it. Vanilla QMK with the `colemak_dh_grid` keymap.
