@@ -96,9 +96,12 @@ RP2040 boards mount as a USB drive named `RPI-RP2`. If the auto-flow ever fails,
 make scottofrog
 # put board in bootloader, then:
 udisksctl mount -b /dev/sda1
-cp vial-qmk/.build/handwired_scottofrog_vial.uf2 /media/$USER/RPI-RP2/
+QMK_TREE="$(qmk config -ro user.qmk_home | cut -d= -f2)"
+cp "$QMK_TREE/.build/handwired_scottofrog_vial.uf2" /media/$USER/RPI-RP2/
 sync
 ```
+
+The build lands in whatever tree `qmk_home` points at in `~/.config/qmk/qmk.ini`, which wins over the `QMK_HOME` the Makefile sets — currently the sibling clone `~/Software/vial-qmk`, not the `vial-qmk/` submodule here.
 
 The board reboots into the new firmware as soon as the copy lands.
 
