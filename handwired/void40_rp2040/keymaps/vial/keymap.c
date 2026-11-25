@@ -17,8 +17,9 @@
 // beside the 2u space, which has no physical switch), so the push keycode is
 // the last entry of each layer and is remappable in Vial. The knob sits where
 // the top-left switch would be, so matrix cell [0,0] has no switch and is not
-// in the layout (Tab is unbound by default -- set it in Vial). QK_BOOT lives
-// on the knob push in the Adjust layer. Rotation maps
+// in the layout. To enter the bootloader without opening the case, hold Esc
+// (matrix [1,0], set via bootmagic in keyboard.json) while plugging in.
+// Rotation maps
 // per-layer via encoder_map below and is remappable in Vial
 // (ENCODER_MAP_ENABLE).
 
@@ -28,7 +29,11 @@ enum layer_names {
   _COLEMAK,
   _RAISE,
   _LOWER,
-  _ADJUST
+  _ADJUST,
+  _L4,
+  _L5,
+  _L6,
+  _L7
 };
 
 // Vial custom keycodes start at QK_KB_0 (listed under "User" in the Vial app,
@@ -37,50 +42,87 @@ enum custom_keycodes {
   MEDIA_TAP = QK_KB_0 // 1 tap: play/pause, 2 taps: next, 3 taps: previous
 };
 
+// Defaults mirror void40Layout.vil (Vial export) so a fresh flash comes up with
+// the current layout. Tap dance #0 (/ , double-tap \) is dynamic and must be
+// restored by loading the .vil in Vial.
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-/* Colemak */
+/* Colemak-DH, home row mods */
 [_COLEMAK] = LAYOUT_ortho_4x12_mit(
-    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_MINS,
-    KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_EQL,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_K,    KC_H,    KC_COMM, KC_DOT,  TD(0),   KC_QUOT,
-    KC_LCTL, TO(_LOWER), KC_LGUI, KC_LBRC, KC_RBRC,    KC_SPC,    KC_BSPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,
+             KC_Q,         KC_W,         KC_F,         KC_P,         KC_B,    KC_J,    KC_L,         KC_U,         KC_Y,         KC_SCLN,      KC_MINS,
+    KC_ESC,  LGUI_T(KC_A), LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), KC_G,    KC_M,    RSFT_T(KC_N), RCTL_T(KC_E), RALT_T(KC_I), RGUI_T(KC_O), KC_EQL,
+    KC_LSFT, KC_Z,         KC_X,         KC_C,         KC_D,         KC_V,    KC_K,    KC_H,         KC_COMM,      KC_DOT,       TD(0),        KC_QUOT,
+    QK_BOOT, KC_NO,        KC_LBRC,      KC_RBRC,      KC_TAB,       KC_SPC,           LT(2, KC_ENT), LT(1, KC_BSPC), LT(1, KC_TAB), KC_NO,   TO(_ADJUST),
     MEDIA_TAP
 ),
 
-/* Lower */
-[_LOWER] = LAYOUT_ortho_4x12_mit(
-    KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_TRNS,
-    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_ASTR,
-    KC_LSFT, KC_F10,  KC_F11,  KC_F12,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_COMM, KC_DOT,  TD(0),   KC_QUOT,
-    KC_TRNS, TO(_COLEMAK), KC_LGUI, KC_LBRC, KC_RBRC, KC_SPC, KC_BSPC, KC_LEFT, KC_DOWN, KC_UP,  KC_RGHT,
-    KC_MUTE
-),
-
-/* Raise */
+/* Layer 1: symbols / arrows / mouse */
 [_RAISE] = LAYOUT_ortho_4x12_mit(
-    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_TRNS,
-    KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
-    KC_CAPS, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, KC_ENT,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MPLY, KC_TRNS, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT,
+             KC_GRV,  S(KC_7), S(KC_8), S(KC_9), KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    KC_ESC,  KC_NO,   S(KC_4), S(KC_5), S(KC_6), KC_NO,   KC_NO,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_NO,
+    KC_LSFT, KC_NO,   S(KC_1), S(KC_2), S(KC_3), KC_NO,   KC_NO,   MS_LEFT, MS_DOWN, MS_UP,   MS_RGHT, KC_NO,
+    KC_NO,   KC_NO,   KC_LBRC, KC_RBRC, KC_NO,   S(KC_0),          MS_BTN1, MS_BTN2, KC_NO,   KC_NO,   KC_NO,
+    KC_NO
+),
+
+/* Layer 2: numpad */
+[_LOWER] = LAYOUT_ortho_4x12_mit(
+             KC_NO,   KC_7,    KC_8,    KC_9,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    KC_ESC,  KC_NO,   KC_4,    KC_5,    KC_6,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    KC_LSFT, KC_NO,   KC_1,    KC_2,    KC_3,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_DOT,  TD(0),   KC_NO,
+    KC_NO,   KC_NO,   KC_LBRC, KC_RBRC, KC_NO,   KC_0,             KC_ENT,  KC_BSPC, KC_NO,   KC_NO,   KC_NO,
     KC_MUTE
 ),
 
-/* Adjust */
+/* Layer 3: QWERTY (TO(3) on base to enter, TO(0) to leave; or hold LT1 + LT2) */
 [_ADJUST] = LAYOUT_ortho_4x12_mit(
-    KC_NO,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_NO,   KC_DEL,
-    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-    EE_CLR,  KC_NO,   KC_NO,   KC_NO,   KC_TRNS,    KC_NO,    KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO,
-    QK_BOOT
+             KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_NO,
+    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_NO,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_NO,
+    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_SPC,           KC_ENT,  KC_BSPC, KC_NO,   KC_NO,   TO(_COLEMAK),
+    KC_TAB
+),
+
+/* Layers 4-7: empty (transparent), assign in Vial */
+[_L4] = LAYOUT_ortho_4x12_mit(
+             _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
+    _______
+),
+[_L5] = LAYOUT_ortho_4x12_mit(
+             _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
+    _______
+),
+[_L6] = LAYOUT_ortho_4x12_mit(
+             _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
+    _______
+),
+[_L7] = LAYOUT_ortho_4x12_mit(
+             _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
+    _______
 )
 };
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_COLEMAK] = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_COLEMAK] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [_RAISE]   = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [_LOWER]   = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [_ADJUST]  = { ENCODER_CCW_CW(_______, _______) },
+    [_L4]      = { ENCODER_CCW_CW(_______, _______) },
+    [_L5]      = { ENCODER_CCW_CW(_______, _______) },
+    [_L6]      = { ENCODER_CCW_CW(_______, _______) },
+    [_L7]      = { ENCODER_CCW_CW(_______, _______) },
 };
 #endif
 
@@ -115,8 +157,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+// Tri-layer: holding Raise + Lower turns on Adjust. Unlike
+// update_tri_layer_state(), only switch Adjust back off if the tri-layer
+// turned it on, so MO/TO/TG(_ADJUST) keys still work on their own.
+static bool tri_adjust = false;
+
 layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+    const layer_state_t adjust = (layer_state_t)1 << _ADJUST;
+    if (layer_state_cmp(state, _LOWER) && layer_state_cmp(state, _RAISE)) {
+        if (!(state & adjust)) {
+            state |= adjust;
+            tri_adjust = true;
+        }
+    } else if (tri_adjust) {
+        state &= ~adjust;
+        tri_adjust = false;
+    }
+    return state;
 }
 
 // Direct-wired encoder push switch (GP28 -> GND, internal pull-up).

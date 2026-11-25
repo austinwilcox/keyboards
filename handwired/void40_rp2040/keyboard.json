@@ -6,6 +6,9 @@
     "processor": "RP2040",
     "bootloader": "rp2040",
     "diode_direction": "COL2ROW",
+    "bootmagic": {
+        "matrix": [1, 0]
+    },
     "usb": {
         "vid": "0xFEED",
         "pid": "0x0017",
